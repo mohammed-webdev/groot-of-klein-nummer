@@ -1,95 +1,146 @@
+"use client"
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useEffect, useState } from "react";
+
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [num1,setNum1] = useState(null)
+  const [num2,setNum2] = useState()
+  const [IsHetGroter,setIsHetGroter] = useState([true,false])
+  const [statusNu,setStatusNu] = useState()
+  const [counterGood,setCounterGood] = useState(0)
+  const [counterNotGood,setCounterNotGood] = useState(0)
+  useEffect(()=>{
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    setNum1(13)
+    setNum2(8)
+   
+    
+    setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+    // if(num1 === num2){
+    //   setNum1(Math.floor(Math.random() * 11))
+    //   setNum2(Math.floor(Math.random() * 11))
+    //   console.log(num1,num2);
+    // }
+  },[])
+   console.log(num1,num2);
+  const checkHandelar = (e) => {
+    // console.log(typeof(Number(e.target.innerHTML)));
+    //  let x = Math.floor(Math.random() * 11);
+    // setNum1(x)
+
+ if(counterGood == 10){
+  return alert(`GOED GEDAAN 💕MINNA💕 🎉 JIJ hebt ${counterGood} en ${counterNotGood}` )
+ } else {
+     if(statusNu){
+      if(Number(e.target.innerHTML) === num1){
+        if(Number(e.target.innerHTML) > num2){
+          console.log("GOOD ANSWER!");
+          setCounterGood(prev => prev + 1)
+          setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+           let audio = new Audio('./good_answer.mp3');
+              audio.play();
+     //          let num1 = Math.floor(Math.random() * 11);
+ // let num2 = Math.floor(Math.random() * 11);
+ setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        } else {
+          console.log("NOT GOOD ANSWER!");
+          setCounterNotGood(prev => prev +1)
+             setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+           let audio = new Audio('./not_good_answer.mp3');
+              audio.play();
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        }
+      } else if(
+        Number(e.target.innerHTML) === num2){
+           if(Number(e.target.innerHTML) > num1){
+          console.log("GOOD ANSWER!");
+             setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+           let audio = new Audio('./good_answer.mp3');
+              audio.play();
+              setCounterGood(prev => prev + 1)
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+          
+        } else {
+          console.log("NOT GOOD ANSWER!");
+             setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+          setCounterNotGood(prev => prev +1)
+               let audio = new Audio('./not_good_answer.mp3');
+              audio.play();
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        }
+        }
+
+
+
+    } else if(Number(e.target.innerHTML) === num1){
+        if(Number(e.target.innerHTML) < num2){
+          console.log("GOOD ANSWER");
+           setCounterGood(prev => prev + 1)
+               setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+          let audio = new Audio('./good_answer.mp3');
+              audio.play();
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        } else {
+          console.log("NOT GOOD ANSWER!!");
+              
+                  setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+               let audio = new Audio('./not_good_answer.mp3');
+              audio.play();
+              setCounterNotGood(prev => prev +1)
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        }
+      } else if(
+        Number(e.target.innerHTML) === num2){
+           if(Number(e.target.innerHTML) < num1){
+          console.log("GOOD ANSWER!");
+           setCounterGood(prev => prev + 1)
+               setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+           let audio = new Audio('./good_answer.mp3');
+              audio.play();
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        } else {
+          console.log("NOT GOOD ANSWER!");
+              setCounterNotGood(prev => prev +1)
+                  setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+               let audio = new Audio('./not_good_answer.mp3');
+              audio.play();
+              setStatusNu(IsHetGroter[Math.floor(Math.random() * IsHetGroter.length)])
+        }
+        }
+ }
+   
+   
+    
+  }
+
+  const GelijkHandelar = ()=>{
+               setNum1( Math.floor(Math.random() * 11))
+          setNum2( Math.floor(Math.random() * 11))
+  }
+
+  return (
+<>
+
+{num1 !== num2 && <h1>WELKE NUMMER IS {statusNu ? <span className="groterOfKleiner">GROOTER</span> : <span className="groterOfKleiner">KLEINER</span>}</h1>}
+<span className="cursor" onClick={Number(num1) !== Number(num2) ? checkHandelar : undefined}>{num1}</span>
+<span> / </span>
+ <span className="cursor" onClick={Number(num1) !== Number(num2) ? checkHandelar : undefined}>{num2}</span>
+{num1 === num2 && <h1 style={{background:"yellow",color:"black",width:"50%",textAlign:"center",cursor:"pointer"}} className="cursor" onClick={GelijkHandelar}>Gelijk</h1>}
+<h2>Good Antwoord :</h2>
+<h1 style={{color:"green"}}>{counterGood}</h1>
+<h2>Fout Antwoord :</h2>
+<h1 style={{color:"red"}}>{counterNotGood}</h1>
+</>
   );
 }

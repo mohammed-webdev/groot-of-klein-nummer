@@ -40,3 +40,14 @@ a {
     color-scheme: dark;
   }
 }
+span.groterOfKleiner{
+  font-size: 35px;
+  color: lightcoral;
+}
+span{
+   font-size: 90px;
+}
+span.cursor{
+  font-size: 90px;
+  cursor: pointer;
+}
